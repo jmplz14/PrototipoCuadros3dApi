@@ -1,0 +1,372 @@
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <script type="text/javascript">
+        var canvas;
+
+        window.onload = window.onresize = function () {
+
+            canvas = document.getElementById('lienzo3D');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function alerta() {
+            alert('hola mundo!');
+        }
+    </script>
+
+    <style>
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #lienzo3D {
+            background-color: #b5b6b6;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        #pieCanvas {
+
+            width: 85%;
+            height: 10%;
+            position: absolute;
+            top: 90%;
+            background-color: white
+        }
+
+        #menuLateral {
+            width: 15%;
+            height: 100%;
+            position: absolute;
+            flex-direction: row;
+            display: flex;
+            left: 85%;
+            background-color: white;
+        }
+
+        #menuIconos {
+            display: flex;
+            flex-direction: column;
+            flex: 0 0 15%;
+            background-color: #f3f4f4;
+
+        }
+
+        #menuElementos {
+
+            display: flex;
+            flex: 0 0 85%;
+        }
+
+        .btn-circle {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 5rem;
+            margin-left: 1%;
+
+            text-align: center;
+        }
+
+        .btn-circle:focus {
+            box-shadow: none;
+            outline: 0;
+        }
+
+        .btn-circle:active {
+            background-color: #b5b6b6;
+            border-color: black;
+            color: #000000;
+        }
+
+        .btn-circle:hover {
+            background-color: #cecfd1;
+
+            color: #000000;
+        }
+
+
+
+        .carrito {
+
+            float: right;
+            margin-right: 1%;
+
+        }
+
+        .botonTerminar {
+            height: 40px;
+            border-radius: 5rem !important;
+            padding: 0px 20px;
+            background-color: #0275d8;
+            font-size: 23px;
+            text-align: center;
+        }
+
+        .botonTerminar:hover {
+            background-color: #025ead;
+        }
+
+        #precio {
+            font-size: 25px;
+
+        }
+
+
+
+        .icono {
+            width: 100%;
+            padding: 10px 0px;
+            cursor: pointer;
+
+
+        }
+
+        .iconoSeleccionado {
+            background-color: white;
+            border-left: 5px solid #0275d8;
+        }
+
+        .icono>span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #menuCarrito {
+            position: relative;
+            float: right;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: right;
+            align-items: center;
+
+
+        }
+
+        #menuBotonera {
+            width: 50%;
+            color: #f3f4f4;
+            position: relative;
+            float: left;
+            height: 100%;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+
+        }
+
+        .separador {
+            font-size: 38px;
+            margin-left: 1%;
+
+        }
+
+        .circulo {
+            height: 25px;
+            width: 25px;
+            border-radius: 50%;
+            display: inline-block;
+            border: 2px solid gray;
+            margin: 1%;
+        }
+
+        .circuloSeleccionado {
+            box-shadow: 0 0 0 3px #0275d8;
+            
+        }
+
+        .blanco {
+            background-color: white;
+        }
+
+        .azul {
+            background-color: blue;
+        }
+
+        .negro {
+            background-color: black;
+        }
+
+        #selectorColores { 
+            width: 100%;
+            padding: 5%;
+            font-size: 25px;
+            overflow: auto;
+        }
+
+        #circulosColores {
+            margin: 5%;
+            cursor: pointer;
+        }
+
+        .elemento>img {
+            position: relative;
+            width: 80%;
+            left: 10%
+        }
+
+        .elemento>span {
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+
+           
+            
+        }
+
+        .elemento {
+            cursor: grab;
+            box-shadow: 0 6px 2px -2px #f3f4f4;
+            padding:4% 0%;
+            margin-bottom: 4%;
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+    <canvas id="lienzo3D">
+
+    </canvas>
+    <div id="menuLateral">
+        <div id="menuIconos">
+            <div class="icono">
+                <span class="material-icons">
+                    radio_button_unchecked
+                </span>
+            </div>
+            <div class="icono">
+                <span class="material-icons">
+                    change_history
+                </span>
+
+
+            </div>
+
+            <div class="icono  iconoSeleccionado">
+                <span class="material-icons">
+                    crop_square
+                </span>
+
+
+            </div>
+            <div class="icono">
+                <span class="material-icons">
+                    crop_7_5
+                </span>
+
+
+
+            </div>
+
+            <div class="icono">
+                <span class="material-icons">
+                    dashboard
+                </span>
+
+
+
+            </div>
+
+
+        </div>
+        <div id="menuElementos">
+            <div id="selectorColores">
+                <span>Colores:</span>
+                <div id="circulosColores">
+                    <span class="circulo circuloSeleccionado blanco"></span>
+                    <span class="circulo azul"></span>
+                    <span class="circulo negro"></span>
+                </div>
+
+                <div class="elemento">
+                    <img src="cuadro1.jpg">
+                    <span>19.55x9x25x3cm</span>
+                </div>
+                <div class="elemento">
+                    <img src="cuadro2.jpg">
+                    <span>9.55x9x25x3cm</span>
+                </div>
+                <div class="elemento">
+                    <img src="cuadro3.jpg">
+                    <span>1.55x9x25x3cm</span>
+                </div>
+                <div class="elemento">
+                    <img src="cuadro4.jpg">
+                    <span> 19.55x99x25x3cm</span>
+                </div>
+                <div class="elemento">
+                    <img src="cuadro5.jpg">
+                </div>
+                <div class="elemento">
+                    <img src="cuadro6.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer id="pieCanvas">
+        <div id="menuBotonera">
+            <button class="btn-circle"><span class="material-icons">
+                    square_foot
+                </span>
+
+            </button>
+            <span class="separador">|</span>
+            <button class="btn-circle"><span class="material-icons">
+                    undo
+                </span></button>
+            <button class="btn-circle "><span class="material-icons">
+                    redo
+                </span>
+
+            </button>
+            <span class="separador">|</span>
+            <button class="btn-circle carrito"><span class="material-icons">
+                    shopping_cart
+                </span>
+
+            </button>
+
+        </div>
+
+        <div id="menuCarrito">
+
+            <span id="precio" class="carrito">800€</span>
+            <button class="carrito botonTerminar text-white">
+                Terminar
+            </button>
+
+
+        </div>
+    </footer>
+</body>
+
+</html>
