@@ -1,9 +1,10 @@
+{% load static %}
 <html>
 
 <head>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
@@ -15,20 +16,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <script type="text/javascript">
-        var canvas;
 
-        window.onload = window.onresize = function () {
-
-            canvas = document.getElementById('lienzo3D');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-
-        function alerta() {
-            alert('hola mundo!');
-        }
-    </script>
+    <script type="module" src="{% static 'javascript/index.js' %}"></script>
 
     <style>
         body,
@@ -41,6 +30,8 @@
         }
 
         #lienzo3D {
+            width: 85%;
+            height: 90%;
             background-color: #b5b6b6;
             position: fixed;
             left: 0;
@@ -74,7 +65,7 @@
 
         }
 
-        #menuElementos {
+        #menuCuadros {
 
             display: flex;
             flex: 0 0 85%;
@@ -196,7 +187,7 @@
 
         .circuloSeleccionado {
             box-shadow: 0 0 0 3px #0275d8;
-            
+
         }
 
         .blanco {
@@ -211,7 +202,7 @@
             background-color: black;
         }
 
-        #selectorColores { 
+        #selectorColores {
             width: 100%;
             padding: 5%;
             font-size: 25px;
@@ -223,32 +214,29 @@
             cursor: pointer;
         }
 
-        .elemento>img {
+        .cuadro>img {
+            cursor: grab;
             position: relative;
             width: 80%;
             left: 10%
         }
 
-        .elemento>span {
+        .cuadro>span {
             font-size: 18px;
             display: flex;
             justify-content: center;
             align-items: center;
-            
 
-           
-            
+
+
+
         }
 
-        .elemento {
-            cursor: grab;
+        .cuadro {
             box-shadow: 0 6px 2px -2px #f3f4f4;
-            padding:4% 0%;
+            padding: 4% 0%;
             margin-bottom: 4%;
         }
-
-
-
     </style>
 </head>
 
@@ -258,76 +246,58 @@
     </canvas>
     <div id="menuLateral">
         <div id="menuIconos">
-            <div class="icono">
-                <span class="material-icons">
-                    radio_button_unchecked
-                </span>
-            </div>
-            <div class="icono">
-                <span class="material-icons">
-                    change_history
-                </span>
 
-
-            </div>
-
-            <div class="icono  iconoSeleccionado">
+            <!--<div class="icono  iconoSeleccionado">
                 <span class="material-icons">
                     crop_square
                 </span>
 
 
-            </div>
+            </div>-->
+
+
+            {% for tipo in tipos %}
             <div class="icono">
                 <span class="material-icons">
-                    crop_7_5
+                    {{tipo.icono}}
                 </span>
-
-
-
             </div>
-
-            <div class="icono">
-                <span class="material-icons">
-                    dashboard
-                </span>
-
-
-
-            </div>
-
-
+            {% endfor %}
         </div>
-        <div id="menuElementos">
+        <div id="menuCuadros">
             <div id="selectorColores">
                 <span>Colores:</span>
                 <div id="circulosColores">
-                    <span class="circulo circuloSeleccionado blanco"></span>
+                    {% for color in colores %}
+                    <span class="circulo" style="background-color:{{color.codigo}}"></span>
+                    {% endfor %}
+                    <!---<span class="circulo circuloSeleccionado blanco"></span>
                     <span class="circulo azul"></span>
-                    <span class="circulo negro"></span>
+                    <span class="circulo negro"></span>--->
                 </div>
 
-                <div class="elemento">
-                    <img src="cuadro1.jpg">
+                <div class="cuadro">
+                    <img src="{% static 'cuadro1.jpg' %}">
+
                     <span>19.55x9x25x3cm</span>
                 </div>
-                <div class="elemento">
-                    <img src="cuadro2.jpg">
+                <div class="cuadro ui-widget-content">
+                    <img src="{% static 'cuadro2.jpg' %}">
                     <span>9.55x9x25x3cm</span>
                 </div>
-                <div class="elemento">
-                    <img src="cuadro3.jpg">
+                <div class="cuadro">
+                    <img src="{% static 'cuadro3.jpg' %}">
                     <span>1.55x9x25x3cm</span>
                 </div>
-                <div class="elemento">
-                    <img src="cuadro4.jpg">
-                    <span> 19.55x99x25x3cm</span>
+                <div class="cuadro">
+                    <img src="{% static 'cuadro4.jpg' %}">
+                    <span>19.55x99x25x3cm</span>
                 </div>
-                <div class="elemento">
-                    <img src="cuadro5.jpg">
+                <div class="cuadro">
+                    <img src="{% static 'cuadro5.jpg' %}">
                 </div>
-                <div class="elemento">
-                    <img src="cuadro6.jpg">
+                <div class="cuadro">
+                    <img src="{% static 'cuadro6.jpg' %}">
                 </div>
             </div>
         </div>
