@@ -24,6 +24,6 @@ class Cuadro(models.Model):
     idTipo = models.ForeignKey(Tipo, on_delete=models.CASCADE)
     precio = models.FloatField()
     img = models.CharField(max_length=200)
-    #fichero3D = models.CharField(max_length=200)
-    #fichero3d = models.CharField(max_length=200)
+    fichero3D = models.CharField(max_length=200)
+    
 

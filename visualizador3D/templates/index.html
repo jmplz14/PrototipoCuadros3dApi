@@ -2,6 +2,12 @@
 <html>
 
 <head>
+    <script type="text/javascript">
+        var colores = JSON.parse('{{colores|safe}}');
+        var tiposCuadros = JSON.parse('{{tipos|safe}}');
+        var cuadros = JSON.parse('{{cuadros|safe}}');
+
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
@@ -256,49 +262,16 @@
             </div>-->
 
 
-            {% for tipo in tipos %}
-            <div class="icono">
-                <span class="material-icons">
-                    {{tipo.icono}}
-                </span>
-            </div>
-            {% endfor %}
         </div>
         <div id="menuCuadros">
             <div id="selectorColores">
                 <span>Colores:</span>
                 <div id="circulosColores">
-                    {% for color in colores %}
-                    <span class="circulo" style="background-color:{{color.codigo}}"></span>
-                    {% endfor %}
-                    <!---<span class="circulo circuloSeleccionado blanco"></span>
-                    <span class="circulo azul"></span>
-                    <span class="circulo negro"></span>--->
+                    
                 </div>
 
-                <div class="cuadro">
-                    <img src="{% static 'cuadro1.jpg' %}">
+               
 
-                    <span>19.55x9x25x3cm</span>
-                </div>
-                <div class="cuadro ui-widget-content">
-                    <img src="{% static 'cuadro2.jpg' %}">
-                    <span>9.55x9x25x3cm</span>
-                </div>
-                <div class="cuadro">
-                    <img src="{% static 'cuadro3.jpg' %}">
-                    <span>1.55x9x25x3cm</span>
-                </div>
-                <div class="cuadro">
-                    <img src="{% static 'cuadro4.jpg' %}">
-                    <span>19.55x99x25x3cm</span>
-                </div>
-                <div class="cuadro">
-                    <img src="{% static 'cuadro5.jpg' %}">
-                </div>
-                <div class="cuadro">
-                    <img src="{% static 'cuadro6.jpg' %}">
-                </div>
             </div>
         </div>
     </div>
