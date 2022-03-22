@@ -12,4 +12,9 @@ Docker: Sera el encargado de desplegar los contenedores para la web y la base de
 Después para realizar la aplicación web se utilizara como es lógico css, html y javascript. 
 
 ## Video De Ejemplo
+https://user-images.githubusercontent.com/26877681/159554350-859e6c06-d4f1-4122-bca2-b7b58a154087.mp4
+
+
+
+
 
